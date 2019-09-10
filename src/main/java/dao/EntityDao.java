@@ -1,5 +1,8 @@
-package invoice;
+package dao;
 
+import model.Client;
+import util.HibernateUtil;
+import model.IBaseEntity;
 import org.hibernate.HibernateException;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
@@ -54,6 +57,10 @@ public class EntityDao {
             e.printStackTrace();
         }
         return list;
+    }
+
+    public void listAll(Class thisClass){
+        getAll(thisClass).forEach(System.out::println);
     }
 
 

@@ -4,9 +4,7 @@
         "http://www.hibernate.org/dtd/hibernate-configuration-3.0.dtd">
 <hibernate-configuration>
     <session-factory>
-        <property name="connection.url">
-            jdbc:mysql://194.181.116.187:13306/restalrant?serverTimezone=Europe/Warsaw
-        </property>
+        <property name="connection.url">jdbc:mysql://localhost/hibernate_biblioteka?serverTimezone=Europe/Warsaw</property>
         <property name="connection.driver_class">com.mysql.cj.jdbc.Driver</property>
         <property name="connection.username">root</property>
         <property name="connection.password">root</property>
@@ -17,10 +15,12 @@
         <!--update - jeśli ustawiony dopisuje brakujące elementy/tabele/kolumny do bazy -->
         <!--create-drop - uruchom connector, stwórz tabele i kolumny, a po zakończeniu aplikacji dropuj wszystkiego -->
         <!--validate - weryfikuje poprawność bazy -->
-        <property name="hbm2ddl.auto">create</property>
+        <property name="hbm2ddl.auto">update</property>
         <property name="show_sql">true</property>
 
-        <mapping class="invoice.Book"/>
-        <mapping class="invoice.Author"/>
+        <mapping class="model.Book"/>
+        <mapping class="model.Author"/>
+        <mapping class="model.Client"/>
+        <mapping class="model.BookLent"/>
     </session-factory>
 </hibernate-configuration>
