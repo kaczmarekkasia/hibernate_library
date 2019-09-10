@@ -27,6 +27,7 @@ public class Book implements IBaseEntity {
     private int numberOfPages;
 
     private int numberOfAvailableCopies;
+
     @Formula(value = "(SELECT count(*) from booklent l where id = l.book_id and l.dateReturned is null)")
     private Integer numberOfBorrowedCopies;
 

@@ -188,7 +188,7 @@ public class Main {
                 }
                 break;
             case "D":
-                System.out.println("What kind of list would you like to see?\n 1. All books\n 2.");
+                System.out.println("What kind of list would you like to see?\n 1. All books\n 2. Book which are ");
                 String listingType = scanner.nextLine();
                 if (listingType.equals("1")) {
                     dao.listAll(Book.class);
@@ -362,8 +362,10 @@ public class Main {
         book.setTitle(scanner.nextLine());
         System.out.println("Year of written:");
         book.setYearWritten(Integer.parseInt(scanner.nextLine()));
-        System.out.println("Nuber of pages:");
+        System.out.println("Number of pages:");
         book.setNumberOfPages(Integer.parseInt(scanner.nextLine()));
+        System.out.println("Number of available copies:");
+        book.setNumberOfAvailableCopies(Integer.parseInt(scanner.nextLine()));
 
         dao.saveOrUpdate(book);
     }
