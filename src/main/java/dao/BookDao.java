@@ -2,7 +2,17 @@ package dao;
 
 import model.Author;
 import model.Book;
+import model.BookLent;
+import org.hibernate.HibernateException;
+import org.hibernate.Session;
+import org.hibernate.SessionFactory;
+import util.HibernateUtil;
 
+import javax.persistence.criteria.CriteriaBuilder;
+import javax.persistence.criteria.CriteriaQuery;
+import javax.persistence.criteria.Root;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Optional;
 
 public class BookDao {
@@ -21,5 +31,7 @@ public class BookDao {
         }
 
     }
+
+
 
 }

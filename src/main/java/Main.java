@@ -69,7 +69,25 @@ public class Main {
                 }
                 break;
             case "C":
-                dao.listAll(BookLent.class);
+                System.out.println("What would you like to get?\n " +
+                        "1. All booklents\n " +
+                        "2. Books which are rented\n " +
+                        "3. Available books \n " +
+                        "4. Unavailable books");
+                String listingType = scanner.nextLine();
+                if (listingType.equals("1")) {
+                    dao.listAll(BookLent.class);
+                }
+                if (listingType.equals("2")) {
+                    blDao.listBooksWhichAreRented().forEach(System.out::println);
+                }
+                if(listingType.equals("3")){
+                    blDao.listAvailableBooks().forEach(System.out::println);
+                }
+                if(listingType.equals("4")){
+                    blDao.listUnavailableBooks().forEach(System.out::println);
+                }
+
                 break;
             default:
                 System.err.println("Wrong answer...Try again!");
@@ -188,14 +206,7 @@ public class Main {
                 }
                 break;
             case "D":
-                System.out.println("What kind of list would you like to see?\n 1. All books\n 2. Book which are ");
-                String listingType = scanner.nextLine();
-                if (listingType.equals("1")) {
                     dao.listAll(Book.class);
-                }
-                if (listingType.equals("2")) {
-
-                }
                 break;
             case "E":
                 System.out.println("Book's id:");
@@ -276,7 +287,8 @@ public class Main {
                     Long aId = Long.parseLong(scanner.nextLine());
                     System.out.println("Book's id:");
                     Long bId = Long.parseLong(scanner.nextLine());
-                    authorDao.addBookToAuthor(aId, bId);
+                    BookDao bookDao = new BookDao();
+                    bookDao.addAuthorToBook(bId, aId);
                 } catch (NumberFormatException nfe) {
                     System.err.println("This is not the id number!");
                 }
@@ -299,11 +311,19 @@ public class Main {
         if (optionalClient.isPresent() && optionalBook.isPresent()){
             Client client = optionalClient.get();
             Book book = optionalBook.get();
-            BookLent bookLent = new BookLent();
-            bookLent.setClient(client);
-            bookLent.setBook(book);
+            if (book.getNumberOfAvailableCopies() > 0){
+                book.setNumberOfAvailableCopies(book.getNumberOfAvailableCopies() - 1);
+                BookLent bookLent = new BookLent();
+                bookLent.setClient(client);
+                bookLent.setBook(book);
 
-            dao.saveOrUpdate(bookLent);
+                dao.saveOrUpdate(book);
+                dao.saveOrUpdate(bookLent);
+
+            }
+            else if (book.getNumberOfAvailableCopies() <= 0){
+                System.err.println("This book is not availabe!");
+            }
         }
         else {
             System.err.println("There is no client or book with such id..");

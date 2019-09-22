@@ -34,7 +34,8 @@ public class Book implements IBaseEntity {
 
     @ToString.Exclude
     @EqualsAndHashCode.Exclude
-    @ManyToMany(mappedBy = "books", fetch = FetchType.EAGER)
+    @ManyToMany(mappedBy = "books"//, fetch = FetchType.EAGER
+             )
     private Set<Author> authors;
 
     @ToString.Exclude
