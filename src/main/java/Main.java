@@ -8,6 +8,8 @@ import util.HibernateUtil;
 
 
 import java.time.LocalDate;
+import java.time.LocalDateTime;
+import java.util.List;
 import java.util.Optional;
 import java.util.Scanner;
 
@@ -73,7 +75,12 @@ public class Main {
                         "1. All booklents\n " +
                         "2. Books which are rented\n " +
                         "3. Available books \n " +
-                        "4. Unavailable books");
+                        "4. Unavailable books \n " +
+                        "5. Books returned in last hours \n " +
+                        "6. Books lented in last 24 hours \n " +
+                        "7. Top books \n " +
+                        "8. Top clients " +
+                        "");
                 String listingType = scanner.nextLine();
                 if (listingType.equals("1")) {
                     dao.listAll(BookLent.class);
@@ -86,6 +93,20 @@ public class Main {
                 }
                 if(listingType.equals("4")){
                     blDao.listUnavailableBooks().forEach(System.out::println);
+                }
+                if(listingType.equals("5")){
+                    System.out.println("Number of hours:");
+                    LocalDateTime hours = LocalDateTime.now().minusHours(Long.parseLong(scanner.nextLine()));
+                    blDao.listBooksReturnedInLastNHours(hours).forEach(System.out::println);
+                }
+                if(listingType.equals("6")){
+                    blDao.listBooksReturnedInLast24Hours().forEach(System.out::println);
+                }
+                if(listingType.equals("7")){
+                    List<Book> listOfBooks =  blDao.listTopBooks();
+                    System.out.println(listOfBooks.get(0));
+                    System.out.println(listOfBooks.get(1));
+                    System.out.println(listOfBooks.get(2));
                 }
 
                 break;

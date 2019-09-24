@@ -63,7 +63,7 @@ Praktyczne
 - listowanie książek nie zwróconych przez klienta *to jest to samo co wyżej?
 - listowanie książek których SĄ jeszcze kopie ++
 - listowanie książek których nie ma już kopii ++
-- listowanie książek które zostały zwrócone w ciągu ostatnich N godzin.
-- listowanie książek które zostały wypożyczone w ciągu ostatnich 24 h
+- listowanie książek które zostały zwrócone w ciągu ostatnich N godzin. ++
+- listowanie książek które zostały wypożyczone w ciągu ostatnich 24 h ++
 - listowanie najczęściej wypożyczanych książek
 - znalezienie najbardziej aktywnego klienta (takiego który najczęściej wypożycza)
