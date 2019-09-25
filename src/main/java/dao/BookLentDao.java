@@ -2,6 +2,7 @@ package dao;
 
 import model.Book;
 import model.BookLent;
+import model.Client;
 import org.hibernate.Session;
 import util.HibernateUtil;
 
@@ -108,6 +109,21 @@ public class BookLentDao {
             query.select(root.get("book"))
                     .groupBy(root.get("book"))
                     .orderBy(cb.desc(cb.count(root.get("book"))));
+
+            return session.createQuery(query).getResultList();
+        }
+    }
+
+    public List<Client> listTopClients(){
+        try (Session session = HibernateUtil.getSessionFactory().openSession()) {
+
+            CriteriaBuilder cb = session.getCriteriaBuilder();
+            CriteriaQuery<Client> query = cb.createQuery(Client.class);
+            Root<BookLent> root = query.from(BookLent.class);
+
+            query.select(root.get("client"))
+                    .groupBy(root.get("client"))
+                    .orderBy(cb.desc(cb.count(root.get("client"))));
 
             return session.createQuery(query).getResultList();
         }

@@ -79,7 +79,7 @@ public class Main {
                         "5. Books returned in last hours \n " +
                         "6. Books lented in last 24 hours \n " +
                         "7. Top books \n " +
-                        "8. Top clients " +
+                        "8. Top client " +
                         "");
                 String listingType = scanner.nextLine();
                 if (listingType.equals("1")) {
@@ -107,6 +107,10 @@ public class Main {
                     System.out.println(listOfBooks.get(0));
                     System.out.println(listOfBooks.get(1));
                     System.out.println(listOfBooks.get(2));
+                }
+                if(listingType.equals("8")){
+                    List<Client> listOfClients =  blDao.listTopClients();
+                    System.out.println(listOfClients.get(0));
                 }
 
                 break;
